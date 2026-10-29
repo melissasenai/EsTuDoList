@@ -1,20 +1,118 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EsTuDoList</title>
+  <meta charset="UTF-8">
+  <!--
+    ETAPA 2 - CELULAR (360px). Só classes SEM prefixo.
+    O QUE MUDOU em relação à etapa 1 (nada foi removido, só entram classes):
+      - ALTERA o HTML do header: o <p> virou <span> e h1 + span agora ficam dentro de uma <div>
+      - ADICIONA classes em todas as tags, na ordem: body > header > main > section do formulário > lista
+    Procure os comentários "ADICIONA" ao longo do arquivo.
+  -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EsToDoList</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<!-- ADICIONA no body: bg-slate-100 (fundo cinza claro) text-slate-800 (texto escuro) min-h-screen (altura mínima da tela) -->
+<body class="bg-slate-100 text-slate-800 min-h-screen">
 
+  <!-- ADICIONA no header: bg-indigo-600 text-white (barra índigo, texto branco) -->
+  <header class="bg-pink-500 text-white">
+    <!-- NOVA <div>: max-w-5xl mx-auto px-4 py-4 (container centralizado) flex items-center justify-between (título à esquerda, subtítulo à direita) -->
+    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+      <!-- ADICIONA: text-xl font-bold -->
+      <h1 class="text-xl font-bold">EsToDoList</h1>
+      <!-- ALTERA: <p> virou <span>. ADICIONA: hidden (esconde o subtítulo no celular) text-sm -->
+      <span class="hidden md:block text-lg ">Organize sua rotina escolar</span>
+    </div>
+  </header>
 
+  <!-- ADICIONA no main: max-w-5xl mx-auto px-4 py-6 (container) grid grid-cols-1 gap-6 (1 coluna, as seções ficam empilhadas) -->
+  <main class="max-w-5xl mx-auto px-4 py-6 grid grid-cols-1 gap-6 lg:flex">
 
+    <!-- Coluna 1: criar, pesquisar e filtrar -->
+    <!-- ADICIONA: bg-white rounded-xl shadow p-4 space-y-4 (cartão branco) -->
+    <section class="bg-white rounded-xl shadow p-4 space-y-4">
+      <!-- ADICIONA: flex flex-col gap-3 (campos empilhados) -->
+      <form class="flex flex-wrap md:flex-row gap-3">
+        <!-- ADICIONA nos 2 campos (texto e data): border rounded-lg px-3 py-3 (py-3 dá uma área de toque confortável) -->
+        <input type="text" placeholder="Nova tarefa" class="border rounded-lg flex-1 md: flex-auto px-5 py-3">
+        <input type="date" class="border rounded-lg px-3 py-3 flex-1">
+        <input type="text" placeholder="Descrição" class="border rounded-lg flex-1 px-3 py-3">
+        <!-- ADICIONA: bg-indigo-600 text-white rounded-lg px-4 py-3 font-semibold hover:bg-indigo-700 -->
+        <button type="submit" class="bg-pink-500 text-white rounded-lg px-3 py-3 md:flex-2 font-semibold hover:bg-indigo-700">Adicionar</button>
+      </form>
 
+      <!-- ADICIONA: w-full border rounded-lg px-3 py-3 -->
+      <input type="search" placeholder="Pesquisar tarefa..." class="w-full border rounded-lg px-3 py-3">
 
+      <!-- ADICIONA: flex gap-2 overflow-x-auto (no celular a barra de filtros rola de lado sem quebrar a página) -->
+      <div class="flex gap-2 overflow-x-auto">
+        <!-- ADICIONA nos 3 filtros: px-4 py-3 rounded-full whitespace-nowrap. Ativo (Todas): bg-indigo-600 text-white. Demais: bg-slate-200 -->
+        <button class="px-4 py-3 rounded-full bg-pink-600 text-white whitespace-nowrap">Todas</button>
+        <button class="px-4 py-3 rounded-full bg-slate-200 whitespace-nowrap">Pendentes</button>
+        <button class="px-4 py-3 rounded-full bg-slate-200 whitespace-nowrap">Concluídas</button>
+      </div>
+    </section>
 
+    <!-- Coluna 2: lista de tarefas -->
+    <section>
+      <!-- ADICIONA: space-y-3 (espaço entre as tarefas) -->
+      <ul class="space-y-3">
+        <!-- ADICIONA nos 3 <li> (repita nos 3): bg-white rounded-xl shadow p-4 flex flex-col gap-3 -->
+        <li class="bg-white rounded-xl shadow p-4 flex flex-col gap-3 md:flex-row gap-3 md:justify-between">
+          <!-- ADICIONA nos 3 <label>: flex items-start gap-3 -->
+          <label class="flex items-start gap-3">
+            <!-- ADICIONA nos 3 checkboxes: mt-1 w-5 h-5 -->
+            <input type="checkbox" class="mt-1 w-5 h-5">
+            <span>
+              <!-- ADICIONA: block font-medium no título da tarefa e text-sm text-slate-500 na data (repita nos 3 itens) -->
+              <span class="block font-medium">Trabalho de História</span>
+              <span class="text-sm text-slate-500">20/10/2026</span>
+            </span>
+          </label>
+          <!-- ADICIONA nas 3 <div> dos botões: flex gap-2 -->
+          <div class="flex gap-2">
+            <!-- ADICIONA nos 6 botões: flex-1 px-4 py-3 rounded-lg. Editar: bg-amber-100. Excluir: bg-red-100 text-red-700 -->
+            <button class="flex-1 px-4 py-3 rounded-lg bg-amber-100">Editar</button>
+            <button class="flex-1 px-4 py-3 rounded-lg bg-red-100 text-red-700">Excluir</button>
+          </div>
+        </li>
 
+        <li class="bg-white rounded-xl shadow p-4 flex flex-col gap-3 md:flex-row gap-3 md:justify-between">
+          <label class="flex items-start gap-3">
+            <input type="checkbox" class="mt-1 w-5 h-5">
+            <span>
+              <span class="block font-medium">Estudar para a prova de Matemática</span>
+              <span class="text-sm text-slate-500">22/10/2026</span>
+            </span>
+          </label>
+          <div class="flex gap-2">
+            <button class="flex-1 px-4 py-3 rounded-lg bg-amber-100">Editar</button>
+            <button class="flex-1 px-4 py-3 rounded-lg bg-red-100 text-red-700">Excluir</button>
+          </div>
+        </li>
 
+        <li class="bg-white rounded-xl shadow p-4 flex flex-col gap-3 md:flex-row gap-3 md:justify-between">
+          <label class="flex items-start gap-3">
+            <input type="checkbox" checked class="mt-1 w-5 h-5">
+            <span>
+              <span class="block font-medium">Entregar projeto no GitHub</span>
+              <span class="text-sm text-slate-500">08/10/2026</span>
+            </span>
+          </label>
+          <div class="flex gap-2">
+            <button class="flex-1 px-4 py-3 rounded-lg bg-amber-100">Editar</button>
+            <button class="flex-1 px-4 py-3 rounded-lg bg-red-100 text-red-700">Excluir</button>
+          </div>
+        </li>
+      </ul>
 
-    
+      <!-- ADICIONA: mt-4 text-sm text-slate-500 -->
+      <p class="mt-4 text-sm text-slate-500">2 tarefas pendentes</p>
+    </section>
+
+  </main>
+
 </body>
 </html>
